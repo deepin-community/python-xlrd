@@ -1,0 +1,26 @@
+Description: getiterator function has been removed from  python 3.9 and replaced for the iter function.
+ This patch fix the compatibility issue.
+Debian-Bug: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=976573
+Author: Josue Ortega <josue@debian.org>
+Last-Update: 2021-01-17
+
+--- a/xlrd/xlsx.py
++++ b/xlrd/xlsx.py
+@@ -263,7 +263,7 @@
+             fprintf(self.logfile, "\n=== %s ===\n", heading)
+         self.tree = ET.parse(stream)
+         getmethod = self.tag2meth.get
+-        for elem in self.tree.iter() if Element_has_iter else self.tree.getiterator():
++        for elem in self.tree.iter() if Element_has_iter else self.tree.iter():
+             if self.verbosity >= 3:
+                 self.dump_elem(elem)
+             meth = getmethod(elem.tag)
+@@ -309,7 +309,7 @@
+         self.tree = ET.parse(stream)
+         getmenu = self.core_props_menu.get
+         props = {}
+-        for elem in self.tree.iter() if Element_has_iter else self.tree.getiterator():
++        for elem in self.tree.iter() if Element_has_iter else self.tree.iter():
+             if self.verbosity >= 3:
+                 self.dump_elem(elem)
+             menu = getmenu(elem.tag)

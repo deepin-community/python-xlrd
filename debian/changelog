@@ -1,0 +1,179 @@
+python-xlrd (1.2.0-2+u002) UNRELEASED; urgency=medium
+
+  * update
+
+ -- Debian Python Team <team+python@tracker.debian.org>  Wed, 15 Jun 2022 10:22:39 +0800
+
+python-xlrd (1.2.0-2) unstable; urgency=medium
+
+  * Team upload .
+  * Add patch 0002-fix-python39-compat: In order to fix FTBS issue.
+    Closes: #976573
+  * Add 0003-python39-compat-iter-detection.patch in order to fix iter()
+    call when defusedxml is installed. Closes: #976620
+  * Bump Standards-Version to 4.5.1. No changes required
+  * debian/watch: Bump file standard version  to 4
+  * debian/control: Document Rules-Requires-Root field as 'no'
+
+ -- Josue Ortega <josue@debian.org>  Sun, 17 Jan 2021 13:56:21 -0600
+
+python-xlrd (1.2.0-1) unstable; urgency=medium
+
+  [ Ondřej Nový ]
+  * d/control: Update Maintainer field with new Debian Python Team
+    contact address.
+  * d/control: Update Vcs-* fields with new Debian Python Team Salsa
+    layout.
+
+  [ Emmanuel Arias ]
+  * Set upstream metadata fields: Bug-Database, Bug-Submit, Repository,
+    Repository-Browse.
+  * Bump debhelper-compat to 13.
+  * d/control: Bump Standards-Version to 4.5.0.
+  * New upstream version 1.2.0 (Closes: #972964).
+  * d/patches: Update patches.
+    - Remove unapplied patches.
+    - Add patch to skip test.
+  * d/examples: update path on examples file.
+  * d/salsa-ci.yml: Enable salsa-ci.
+
+  [ Debian Janitor ]
+  * Use secure URI in Homepage field.
+
+ -- Emmanuel Arias <eamanu@yaerobi.com>  Wed, 28 Oct 2020 12:51:15 -0300
+
+python-xlrd (1.1.0-5) unstable; urgency=medium
+
+  * Team upload.
+  * Drop python2 support; Closes: #938276
+
+ -- Sandro Tosi <morph@debian.org>  Sun, 15 Dec 2019 15:26:44 -0500
+
+python-xlrd (1.1.0-4) unstable; urgency=medium
+
+  * Team upload
+
+  [ Matthias Klose ]
+  * Stop using time.clock, removed in 3.8 (Closes: 943418)
+
+ -- Graham Inggs <ginggs@debian.org>  Fri, 22 Nov 2019 09:14:34 +0000
+
+python-xlrd (1.1.0-3) unstable; urgency=medium
+
+  * Team upload.
+  * Reintroduce Python 2 support.
+
+ -- Ondřej Nový <onovy@debian.org>  Tue, 27 Aug 2019 15:24:37 +0200
+
+python-xlrd (1.1.0-2) unstable; urgency=medium
+
+  * Team upload.
+  * d/control: Set Vcs-* to salsa.debian.org
+  * d/copyright: Fix Format URL to correct one
+  * Use 'python3 -m sphinx' instead of sphinx-build for building docs
+  * Use debhelper-compat instead of debian/compat.
+  * Drop Python 2 support
+    - Move runxlrd to python3-xlrd package
+  * Enable autopkgtest-pkg-python testsuite.
+  * Bump debhelper compat level to 12.
+
+ -- Ondřej Nový <onovy@debian.org>  Mon, 26 Aug 2019 08:04:59 +0200
+
+python-xlrd (1.1.0-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Refresh patches after git-dpm to gbp pq conversion.
+  * d/control: bump Standards-Version.
+  * d/rules: remove symbolic rules to examples during tests.
+  * d/compat: switch to debhelper 10.
+  * d/watch: switch to HTTPS.
+  * d/control: add a package for documentation.
+
+ -- Vincent Bernat <bernat@debian.org>  Tue, 14 Nov 2017 08:20:54 +0100
+
+python-xlrd (1.0.0-1) unstable; urgency=medium
+
+  [ Ondřej Nový ]
+  * Fixed VCS URL (https)
+
+  [ Vincent Bernat ]
+  * New upstream version.
+  * d/patches: remove disable-non-working-tests.patch (needed files are
+    now provided).
+  * d/control: bump Standards-Version.
+  * d/control: build-depends on python{,3}-setuptools.
+  * d/rules: re-enable unittests.
+
+ -- Vincent Bernat <bernat@debian.org>  Sun, 03 Jul 2016 19:53:02 +0200
+
+python-xlrd (0.9.4-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Bump Standards-Version to 3.9.6.
+  * Remove unit tests (as requested by upstream).
+  * Update debian/watch to use debian.net redirector.
+  * Switch to pybuild. This makes the build reproducible.
+
+ -- Vincent Bernat <bernat@debian.org>  Thu, 20 Aug 2015 10:58:41 +0200
+
+python-xlrd (0.9.2-1) unstable; urgency=low
+
+  [ Jakub Wilk ]
+  * Use canonical URIs for Vcs-* fields.
+
+  [ Vincent Bernat ]
+  * Promote Debian Python Modules Team as maintainer. Closes: #700555.
+  * Switch from dpatch to 3.0 (quilt) format. Closes: #664378.
+  * New upstream release. Closes: #682962.
+     + Update debian/watch to look at Pypi.
+     + Update homepage.
+     + Drop shebang patch. Not needed anymore.
+  * Bump Standards-Version to 3.9.4.
+  * Switch to dh and dh_python2.
+  * Enhance long description in debian/control.
+  * Add doc-base registration.
+  * Update manual page.
+  * Switch to machine-readable debian/copyright.
+  * Use shipped unittests.
+  * Add Python 3 support. Closes: #614503.
+
+ -- Vincent Bernat <bernat@debian.org>  Tue, 11 Jun 2013 15:22:17 +0200
+
+python-xlrd (0.6.1-2) unstable; urgency=low
+
+  [ Sandro Tosi ]
+  * debian/control
+    - switch Vcs-Browser field to viewsvn
+
+  [ Luca Falavigna ]
+  * Switch to python-support.
+  * debian/rules: pass --prefix=/usr to setup.py (Closes: #557936).
+  * debian/control: bump Standards-Version to 3.8.3, no changes needed.
+
+ -- Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>  Sat, 12 Dec 2009 13:08:41 +0100
+
+python-xlrd (0.6.1-1) unstable; urgency=low
+
+  * New upstream version
+  * New Maintainer
+  * First release into Debian repository (closes: #366137)
+  * new debian/
+
+ -- Thomas Bläsing <thomasbl@pool.math.tu-berlin.de>  Thu, 08 May 2008 21:24:54 +0000
+
+python-xlrd (0.6.1a4-2) UNRELEASED; urgency=low
+
+  * debian/runxlrd.1, debian/manpages: manpage added.
+  * debian/copyright: refer to copy of BSD license.
+  * debian/docs: install /usr/share/doc/python-xlrd/doc/{compdoc,HISTORY,README,xlrd}.html.
+  * debian/examples: install examples.
+  * debian/{rules,install}, debian/runxlrd: supply a wrapper script in /usr/bin/runxlrd
+    to work around missing #!/usr/bin/python in runxlrd.py.
+
+ -- Joost van Baal <joostvb+debian@uvt.nl>  Thu, 24 May 2007 07:29:28 +0200
+
+python-xlrd (0.6.1a4-1) UNRELEASED; urgency=low
+
+  * Initial Release (closes: #366137)
+
+ -- Joost van Baal <joostvb+debian@uvt.nl>  Mon, 21 May 2007 13:11:02 +0200
