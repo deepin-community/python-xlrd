@@ -1,8 +1,12 @@
-python-xlrd (1.2.0-2+u002) UNRELEASED; urgency=medium
+python-xlrd (1.2.0-2deepin) unstable; urgency=medium
 
+  [ Debian Python Team ]
   * update
 
- -- Debian Python Team <team+python@tracker.debian.org>  Wed, 15 Jun 2022 10:22:39 +0800
+  [ Yutao Meng ]
+  * Regulate version name
+
+ -- Yutao Meng <mengyutao@uniontech.com>  Mon, 20 Mar 2023 11:28:21 +0800
 
 python-xlrd (1.2.0-2) unstable; urgency=medium
 
