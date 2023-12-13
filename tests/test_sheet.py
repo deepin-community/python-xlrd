@@ -6,7 +6,7 @@ from unittest import TestCase
 import xlrd
 from xlrd.timemachine import xrange
 
-from .base import from_this_dir
+from .helpers import from_sample
 
 SHEETINDEX = 0
 NROWS = 15
@@ -22,7 +22,7 @@ class TestSheet(TestCase):
                   'AXISDATUMLEVELS', 'PROFILELEVELS']
 
     def setUp(self):
-        self.book = xlrd.open_workbook(from_this_dir('profiles.xls'), formatting_info=True)
+        self.book = xlrd.open_workbook(from_sample('profiles.xls'), formatting_info=True)
 
     def check_sheet_function(self, function):
         self.assertTrue(function(0, 0))
@@ -91,11 +91,37 @@ class TestSheet(TestCase):
         row = sheet.row(0)
         self.assertEqual(len(row), NCOLS)
 
+    def test_getitem_int(self):
+        sheet = self.book.sheet_by_index(SHEETINDEX)
+        row = sheet[0]
+        self.assertEqual(len(row), NCOLS)
+
+    def test_getitem_tuple(self):
+        sheet = self.book.sheet_by_index(SHEETINDEX)
+        self.assertNotEqual(xlrd.empty_cell, sheet[0, 0])
+        self.assertNotEqual(xlrd.empty_cell, sheet[NROWS-1, NCOLS-1])
+
+    def test_getitem_failure(self):
+        sheet = self.book.sheet_by_index(SHEETINDEX)
+        with self.assertRaises(ValueError):
+            sheet[0, 0, 0]
+
+        with self.assertRaises(TypeError):
+            sheet["hi"]
+
     def test_get_rows(self):
         sheet = self.book.sheet_by_index(SHEETINDEX)
         rows = sheet.get_rows()
         self.assertTrue(isinstance(rows, types.GeneratorType), True)
         self.assertEqual(len(list(rows)), sheet.nrows)
+
+    def test_iter(self):
+        sheet = self.book.sheet_by_index(SHEETINDEX)
+        rows = []
+        # check syntax
+        for row in sheet:
+            rows.append(row)
+        self.assertEqual(len(rows), sheet.nrows)
 
     def test_col_slice(self):
         sheet = self.book.sheet_by_index(SHEETINDEX)
@@ -125,19 +151,10 @@ class TestSheet(TestCase):
 class TestSheetRagged(TestCase):
 
     def test_read_ragged(self):
-        book = xlrd.open_workbook(from_this_dir('ragged.xls'), ragged_rows=True)
+        book = xlrd.open_workbook(from_sample('ragged.xls'), ragged_rows=True)
         sheet = book.sheet_by_index(0)
         self.assertEqual(sheet.row_len(0), 3)
         self.assertEqual(sheet.row_len(1), 2)
         self.assertEqual(sheet.row_len(2), 1)
         self.assertEqual(sheet.row_len(3), 4)
         self.assertEqual(sheet.row_len(4), 4)
-
-
-class TestMergedCells(TestCase):
-
-    def test_tidy_dimensions(self):
-        book = xlrd.open_workbook(from_this_dir('merged_cells.xlsx'))
-        for sheet in book.sheets():
-            for rowx in xrange(sheet.nrows):
-                self.assertEqual(sheet.row_len(rowx), sheet.ncols)

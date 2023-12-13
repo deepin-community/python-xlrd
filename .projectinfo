@@ -1,1 +1,0 @@
-{"project":"python-xlrd","type":"","version":"1.2.0-2","hierarchy":"base","priority":"","maintainer":"","packager":"","builddeps":" debhelper-compat (= 13), dh-python, python3-sphinx, python3-setuptools, python3-pkginfo, python3-all, ","homepage":" https://www.python-excel.org/","git":"https://salsa.debian.org/python-team/packages/python-xlrd.git"}
