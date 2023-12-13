@@ -2,20 +2,24 @@
 
 from unittest import TestCase
 
+import xlrd
 from xlrd import open_workbook
 from xlrd.book import Book
 from xlrd.sheet import Sheet
 
-from .base import from_this_dir
+from .helpers import from_sample
+
+SHEETINDEX = 0
+NROWS = 15
+NCOLS = 13
 
 
 class TestWorkbook(TestCase):
-
     sheetnames = ['PROFILEDEF', 'AXISDEF', 'TRAVERSALCHAINAGE',
                   'AXISDATUMLEVELS', 'PROFILELEVELS']
 
     def setUp(self):
-        self.book = open_workbook(from_this_dir('profiles.xls'))
+        self.book = open_workbook(from_sample('profiles.xls'))
 
     def test_open_workbook(self):
         self.assertTrue(isinstance(self.book, Book))
@@ -43,3 +47,17 @@ class TestWorkbook(TestCase):
 
     def test_sheet_names(self):
         self.assertEqual(self.sheetnames, self.book.sheet_names())
+
+    def test_getitem_ix(self):
+        sheet = self.book[SHEETINDEX]
+        self.assertNotEqual(xlrd.empty_cell, sheet.cell(0, 0))
+        self.assertNotEqual(xlrd.empty_cell, sheet.cell(NROWS - 1, NCOLS - 1))
+
+    def test_getitem_name(self):
+        sheet = self.book[self.sheetnames[SHEETINDEX]]
+        self.assertNotEqual(xlrd.empty_cell, sheet.cell(0, 0))
+        self.assertNotEqual(xlrd.empty_cell, sheet.cell(NROWS - 1, NCOLS - 1))
+
+    def test_iter(self):
+        sheets = [sh.name for sh in self.book]
+        self.assertEqual(sheets, self.sheetnames)

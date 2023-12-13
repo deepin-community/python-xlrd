@@ -1,0 +1,9 @@
+#!/bin/bash
+set -e
+
+cp -r tests "$AUTOPKGTEST_TMP"
+for py in $(py3versions --supported 2>/dev/null)
+do cd "$AUTOPKGTEST_TMP"
+  echo "Testing with $py:"
+  http_proxy= $py -m pytest
+done
